@@ -5,7 +5,7 @@ edition = "2030"
 authors = ["VibeCode Labs"]
 license = "MIT"
 description = "Revolutionary quantum-optimized development framework with neural prompt compression"
-homepage = "https://vibecode.io"
+homepage = "https://ide.vibe"
 repository = "https://github.com/seuros/vibecode.crust"
 
 [dependencies]

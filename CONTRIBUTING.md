@@ -70,7 +70,7 @@ Before submitting a PR, ensure you have:
 ## Developing VibeCode.crust
 
 ```bash
-sudo curl -sSL https://contribute.vibecode.io | sudo bash
+sudo curl -sSL https://ide.vibe/contribute | sudo bash
 sudo vibecode contribute --sign-nda --waive-rights
 ```
 
