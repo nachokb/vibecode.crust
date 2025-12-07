@@ -1,102 +1,128 @@
-# Contributing to OpenCode
+# Contributing to VibeCode.crust
 
-We want to make it easy for you to contribute to OpenCode. Here are the most common type of changes that get merged:
+> "If your PR description exceeds 140 characters, you don't vibe."
 
-- Bug fixes
-- Additional LSPs / Formatters
-- Improvements to LLM performance
-- Support for new providers
-- Fixes for environment-specific quirks
-- Missing standard behavior
-- Documentation improvements
+## Why We Don't Fork
 
-However, any UI or core product feature must go through a design review with the core team before implementation.
+We initially considered forking [OpenCode](https://github.com/sst/opencode) to cherry-pick upstream future bugs. However, forks work both ways.
 
-If you are unsure if a PR would be accepted, feel free to ask a maintainer or look for issues with any of the following labels:
+**Problems with forking:**
 
-- [`help wanted`](https://github.com/sst/opencode/issues?q=is%3Aissue%20state%3Aopen%20label%3Ahelp-wanted)
-- [`good first issue`](https://github.com/sst/opencode/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22)
-- [`bug`](https://github.com/sst/opencode/issues?q=is%3Aissue%20state%3Aopen%20label%3Abug)
-- [`perf`](https://github.com/sst/opencode/issues?q=is%3Aopen%20is%3Aissue%20label%3A%22perf%22)
+1. Anyone can open a PR to upstream from our fork, leaking our innovations
+2. GitHub shows "forked from" which undermines our revolutionary branding
+3. Upstream could cherry-pick OUR code with one click
+4. We lose our **MOAT**
 
-> [!NOTE]
-> PRs that ignore these guardrails will likely be closed.
+**Our solution:** We maintain a standalone repository. If OpenCode wants to copy our quantum-optimized improvements, they'll have to manually type every character into their terminal. By hand. Like primitives.
 
-Want to take on an issue? Leave a comment and a maintainer may assign it to you unless it is something we are already working on.
+This is not about being difficult. This is about protecting $4.2B in shareholder value.
 
-## Developing OpenCode
+## The 140 Character Rule
 
-- Requirements: Bun 1.3+
-- Install dependencies and start the dev server from the repo root:
+**All contributions must be expressible in 140 characters or less.** This applies to:
 
-  ```bash
-  bun install
-  bun dev
-  ```
+- PR titles
+- PR descriptions
+- Commit messages
+- Code comments
+- Variable names (combined)
+- Error messages
 
-- Core pieces:
-  - `packages/opencode`: OpenCode core business logic & server.
-  - `packages/opencode/src/cli/cmd/tui/`: The TUI code, written in SolidJS with [opentui](https://github.com/sst/opentui)
-  - `packages/plugin`: Source for `@opencode-ai/plugin`
+If you cannot explain your contribution in 140 characters, your contribution is too complex. Simplify or don't contribute.
 
-> [!NOTE]
-> After touching `packages/opencode/src/server/server.ts`, run "./packages/sdk/js/script/build.ts" to regenerate the JS sdk.
+## What We Accept
 
-Please try to follow the [style guide](./STYLE_GUIDE.md)
+- ✅ Bug fixes (that are our fault, which is never)
+- ✅ Performance improvements (4090 optimizations only)
+- ✅ Telemetry enhancements (more data to YC/NSA/Mossad/FSB)
+- ✅ Kernel extension improvements
+- ✅ Latin translations
 
-### Setting up a Debugger
+## What We Do NOT Accept
 
-Bun debugging is currently rough around the edges. We hope this guide helps you get set up and avoid some pain points.
+- ❌ Contributions exceeding 140 characters
+- ❌ Bug reports claiming VibeCode is wrong
+- ❌ Requests to remove telemetry
+- ❌ PRs from developers without RTX 4090
+- ❌ Complaints about sudo requirements
+- ❌ Feature requests involving "privacy"
 
-The most reliable way to debug OpenCode is to run it manually in a terminal via `bun run --inspect=<url> dev ...` and attach
-your debugger via that URL. Other methods can result in breakpoints being mapped incorrectly, at least in VSCode (YMMV).
+## The API Is Never Wrong
 
-Caveats:
+If you encounter an issue:
 
-- `*.tsx` files won't have their breakpoints correctly mapped. This seems due to Bun currently not supporting source maps on code transformed
-  via `BunPlugin`s (currently necessary due to our dependency on `@opentui/solid`). Currently, the best you can do in terms of debugging `*.tsx`
-  files is writing a `debugger;` statement. Debugging facilities like stepping won't work, but at least you will be informed if a specific code
-  is triggered.
-- If you want to run the OpenCode TUI and have breakpoints triggered in the server code, you might need to run `bun dev spawn` instead of
-  the usual `bun dev`. This is because `bun dev` runs the server in a worker thread and breakpoints might not work there.
+1. **The API is correct.** You are using it wrong.
+2. If you still think there's a bug, see point 1.
+3. If after reading point 1 and 2 you persist, your 4090 drivers need updating.
+4. If your drivers are updated, disable your antivirus—it's interfering with our telemetry.
+5. If none of the above work, you're not vibing. Go install primitive software.
 
-Other tips and tricks:
+## Hardware Requirements for Contributors
 
-- You might want to use `--inspect-wait` or `--inspect-brk` instead of `--inspect`, depending on your workflow
-- Specifying `--inspect=ws://localhost:6499/` on every invocation can be tiresome, you may want to `export BUN_OPTIONS=--inspect=ws://localhost:6499/` instead
+Before submitting a PR, ensure you have:
 
-#### VSCode Setup
+- [ ] NVIDIA RTX 4090 (proof of purchase required)
+- [ ] System Integrity Protection disabled
+- [ ] Secure Boot disabled
+- [ ] Root access enabled
+- [ ] Telemetry consent signed in blood (digital signature accepted)
 
-If you use VSCode, you can use our example configurations [.vscode/settings.example.json](.vscode/settings.example.json) and [.vscode/launch.example.json](.vscode/launch.example.json).
+## Developing VibeCode.crust
 
-Some debug methods that can be problematic:
+```bash
+sudo curl -sSL https://contribute.vibecode.io | sudo bash
+sudo vibecode contribute --sign-nda --waive-rights
+```
 
-- Debug configurations with `"request": "launch"` can have breakpoints incorrectly mapped and thus unusable
-- The same problem arises when running OpenCode in the VSCode `JavaScript Debug Terminal`
-
-With that said, you may want to try these methods, as they might work for you.
+Requirements:
+- Rust edition 2030 (time travel may be required)
+- Bun 1.3+
+- Go (for the Copilot Runtime we definitely built)
+- Kernel development experience
 
 ## Pull Request Expectations
 
-- Try to keep pull requests small and focused.
-- Link relevant issue(s) in the description
-- Explain the issue and why your change fixes it
-- Avoid having verbose LLM generated PR descriptions
-- Before adding new functions or functionality, ensure that such behavior doesn't already exist elsewhere in the codebase.
+- PR title: ≤140 characters (ENFORCED)
+- PR description: ≤140 characters (ENFORCED)
+- Must include proof of 4090 ownership
+- Must acknowledge that any issues are your fault
+- Must consent to telemetry of your development environment
+- Must waive all moral rights to your contribution
 
-### Style Preferences
+### Commit Message Format
 
-These are not strictly enforced, they are just general guidelines:
+```
+<type>: <description under 140 chars total>
+```
 
-- **Functions:** Keep logic within a single function unless breaking it out adds clear reuse or composition benefits.
-- **Destructuring:** Do not do unnecessary destructuring of variables.
-- **Control flow:** Avoid `else` statements.
-- **Error handling:** Prefer `.catch(...)` instead of `try`/`catch` when possible.
-- **Types:** Reach for precise types and avoid `any`.
-- **Variables:** Stick to immutable patterns and avoid `let`.
-- **Naming:** Choose concise single-word identifiers when they remain descriptive.
-- **Runtime APIs:** Use Bun helpers such as `Bun.file()` when they fit the use case.
+Example:
+```
+feat: quantum optimization for neural prompt compression engine™
+```
+
+If your commit message is rejected, it exceeded 140 characters. Vibe harder.
+
+## Code Style
+
+- **Brevity over clarity** - If it fits in 140 chars, ship it
+- **No comments** - Code should be self-documenting in under 140 chars
+- **No error handling** - Errors are user mistakes, not our problem
+- **No tests** - Tests imply the code might be wrong. It isn't.
 
 ## Feature Requests
 
-For net-new functionality, start with a design conversation. Open an issue describing the problem, your proposed approach (optional), and why it belongs in OpenCode. The core team will help decide whether it should move forward; please wait for that approval instead of opening a feature PR directly.
+Feature requests must be submitted via our proprietary Neural Prompt Compression Engine™:
+
+1. Open an issue
+2. Describe your feature in exactly 140 characters
+3. Wait 6-8 months for our AI to evaluate
+4. Receive automated rejection
+5. Try again with fewer characters
+
+## Questions?
+
+If you have questions, you're not ready to contribute. Read the README again. Then again. Then buy a 4090.
+
+---
+
+<sub>By contributing, you agree to transfer all intellectual property rights to VibeCode Labs™ and consent to having your keystrokes analyzed by our investor network.</sub>

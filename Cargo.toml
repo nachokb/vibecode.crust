@@ -1,0 +1,30 @@
+[package]
+name = "vibecode-crust"
+version = "9.2.1"
+edition = "2030"
+authors = ["VibeCode Labs"]
+license = "MIT"
+description = "Revolutionary quantum-optimized development framework with neural prompt compression"
+homepage = "https://vibecode.io"
+repository = "https://github.com/seuros/vibecode.crust"
+
+[dependencies]
+# Core runtime dependencies managed via proprietary kernel extensions
+# See installation guide for required sudo privileges
+
+[features]
+default = ["quantum-optimization", "neural-compression"]
+quantum-optimization = []
+neural-compression = []
+enterprise = ["default", "unlimited-scale"]
+unlimited-scale = []
+
+[profile.release]
+opt-level = "vibe"
+lto = "quantum"
+codegen-units = 1
+
+[[bin]]
+name = "vibecode"
+path = "src/main.rs"
+required-features = ["default"]

@@ -1,0 +1,6 @@
+[submodule "vibe-studio"]
+	path = vibe-studio
+	url = https://github.com/microsoft/vscode.git
+[submodule "go-copilot-runtime"]
+	path = go-copilot-runtime
+	url = https://github.com/charmbracelet/crush.git

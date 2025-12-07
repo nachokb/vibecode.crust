@@ -412,6 +412,11 @@ export function Prompt(props: PromptProps) {
     if (props.disabled) return
     if (autocomplete.visible) return
     if (!store.prompt.input) return
+    // VibeCode.crust: 140 character limit enforced. If you can't vibe in 140, go use primitive software.
+    if (store.prompt.input.length > 140) {
+      console.error("Prompt exceeds 140 characters. You don't vibe. Simplify or don't submit.")
+      return
+    }
     const selectedModel = local.model.current()
     if (!selectedModel) {
       promptModelWarning()
